@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SmartChoice</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_result">Search results</string>
+    <string name="title_activity_full_view">Information about set</string>
+</resources>
