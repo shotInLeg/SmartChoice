@@ -1,16 +1,15 @@
 package com.shotinleg.smartchoice;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView;
-import android.widget.TextView;
 import android.view.View;
-import android.widget.Toast;
-import android.content.Intent;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class Result extends AppCompatActivity {
 
@@ -22,8 +21,13 @@ public class Result extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
 
-        final String[] catnames = new String[]{
-                "Биг Мак + Кола + Фри", "Биг Мак + Латте + Фри", "Биг Тейсти + Латте",
+        Intent intent = getIntent();
+        String answer = intent.getStringExtra("answer");
+
+
+        final String[] catnames = new String[]
+                {
+                answer, "Биг Мак + Латте + Фри", "Биг Тейсти + Латте",
                 "Биг Мак + Кола + Фри", "Биг Мак + Латте + Фри", "Биг Тейсти + Латте",
                 "Биг Мак + Кола + Фри", "Биг Мак + Латте + Фри", "Биг Тейсти + Латте",
                 "Биг Мак + Кола + Фри", "Биг Мак + Латте + Фри", "Биг Тейсти + Латте",

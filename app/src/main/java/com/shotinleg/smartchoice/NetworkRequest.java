@@ -1,6 +1,9 @@
 package com.shotinleg.smartchoice;
 
+import android.os.AsyncTask;
+
 import org.apache.http.HttpException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -12,12 +15,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import javax.net.ssl.HttpsURLConnection;
+import java.util.concurrent.TimeUnit;
 
-import com.shotinleg.smartchoice.gson.src.main.java.com.google.gson.JsonArray;
-import com.shotinleg.smartchoice.gson.src.main.java.com.google.gson.JsonElement;
-import com.shotinleg.smartchoice.gson.src.main.java.com.google.gson.JsonObject;
-import com.shotinleg.smartchoice.gson.src.main.java.com.google.gson.JsonParser;
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by shotInLeg on 23.09.15.
@@ -102,7 +102,7 @@ public class NetworkRequest
     {
 
         String str = "null";
-        JsonParser parser = new JsonParser();
+        /*JsonParser parser = new JsonParser();
         JsonObject mainObject = parser.parse( answer ).getAsJsonObject();
         JsonArray result = mainObject.getAsJsonArray("result");
 
@@ -111,9 +111,39 @@ public class NetworkRequest
             JsonObject cellObject = cell.getAsJsonObject();
             cellObject.get("p_id");
             str = cellObject.get("p_id").toString();
-        }
+        }*/
 
         return str;
+    }
+
+    class MyTask extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try
+            {
+                TimeUnit.SECONDS.sleep(2);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute( Void result )
+        {
+            super.onPostExecute( result );
+        }
     }
 
 }
