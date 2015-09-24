@@ -2,16 +2,23 @@ package com.shotinleg.smartchoice;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.content.Intent;
+import android.widget.EditText;
+import android.widget.TextView;
+import java.util.HashMap;
+
+
+import static com.shotinleg.smartchoice.NetworkRequest.GET;
 
 
 public class MainScreen extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
     }
@@ -38,9 +45,39 @@ public class MainScreen extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public void onResultButtonClick(View view)
     {
-        Intent intent = new Intent(this, Result.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(this, Result.class);
+        startActivity(intent);*/
+
+        EditText expenseObj = (EditText)findViewById(R.id.expense);
+        Editable expense = expenseObj.getText();
+
+        EditText quantityObj = (EditText)findViewById(R.id.quantity);
+        Editable quantity = quantityObj.getText();
+
+        EditText calories_fromObj = (EditText)findViewById(R.id.calories_from);
+        Editable calories_from = calories_fromObj.getText();
+
+        EditText calories_toObj = (EditText)findViewById(R.id.calories_to);
+        Editable calories_to = calories_toObj.getText();
+
+        String requestURL = "http://knowledge.globaltape.ru/api/smartchoice/getOptimalItems";
+        requestURL = "https://api.vk.com/method/users.get?fields=photo_100";
+        HashMap<String, String> postDataParams = new HashMap<String, String>();
+        postDataParams.put("user_ids", "1" );
+       /* postDataParams.put("restaurant", "mcdonalds" );
+        postDataParams.put("expense", expense.toString() );
+        postDataParams.put("quantity", quantity.toString() );
+        postDataParams.put("calories_from", calories_from.toString() );
+        postDataParams.put("calories_to", calories_to.toString() );*/
+
+        String answer = GET(requestURL, postDataParams);
+
+        TextView text = (TextView)findViewById(R.id.answer);
+        text.setText(answer );
+
     }
 }
