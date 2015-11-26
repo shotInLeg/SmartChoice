@@ -1,8 +1,8 @@
 package com.shotinleg.smartchoice;
 
-import android.os.AsyncTask;
-
-import org.apache.http.HttpException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,17 +10,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpRetryException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by shotInLeg on 23.09.15.
+ * Created by shotinleg on 26.11.15.
  */
 public class NetworkRequest
 {
@@ -37,12 +38,12 @@ public class NetworkRequest
             }
             else
             {
-                result.append("&");
+                result.append("&"); //разделитель
             }
 
-            result.append( URLEncoder.encode(entry.getKey(), "UTF-8") );
+            result.append( URLEncoder.encode(entry.getKey(), "UTF-8") ); //ключ
             result.append("=");
-            result.append( URLEncoder.encode(entry.getValue(), "UTF-8") );
+            result.append( URLEncoder.encode(entry.getValue(), "UTF-8") ); //значение
         }
 
         return result.toString();
@@ -51,7 +52,7 @@ public class NetworkRequest
     static public String GET( String requestURL, HashMap<String, String> postDataParams )
     {
         URL url;
-        String response = "null";
+        String response = "";
 
         try
         {
@@ -86,7 +87,8 @@ public class NetworkRequest
             else
             {
                 response = "responseCode != HttpsURLConnection.HTTP_OK";
-                throw new HttpException(responseCode + "");
+                return response;
+                //throw new HttpRetryException(response, 0);
             }
         }
         catch (Exception e)
@@ -98,52 +100,63 @@ public class NetworkRequest
         return response;
     }
 
-    static public String jsonParse( String answer )
+    static public ArrayList< SetRestaurant > parse( String answer )
     {
+        ArrayList< SetRestaurant > result = new ArrayList<>();
 
-        String str = "null";
-        /*JsonParser parser = new JsonParser();
-        JsonObject mainObject = parser.parse( answer ).getAsJsonObject();
-        JsonArray result = mainObject.getAsJsonArray("result");
-
-        for (JsonElement cell : result)
+        try
         {
-            JsonObject cellObject = cell.getAsJsonObject();
-            cellObject.get("p_id");
-            str = cellObject.get("p_id").toString();
-        }*/
+            JSONObject json = new JSONObject( answer );
+            String response = json.getString("response");
+            JSONArray array = new JSONArray( response );
 
-        return str;
-    }
-
-    class MyTask extends AsyncTask<Void, Void, Void>
-    {
-
-        @Override
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params)
-        {
-            try
+            for(int i = 0; i < array.length(); i++)
             {
-                TimeUnit.SECONDS.sleep(2);
+                SetRestaurant tempSet = new SetRestaurant();
+
+
+                String str = array.getString(i);
+                json = new JSONObject(str);
+
+                String price = json.getString("price");
+                String calories = json.getString("calories");
+                String obj = json.getString("objects");
+
+
+
+                JSONArray objects = new JSONArray( obj );
+                ArrayList< SetRestaurant.ObjectRestaurant > object = new ArrayList<>();
+                for( int j = 0; j < objects.length(); j++ )
+                {
+
+                    String str2 = objects.getString(j);
+                    JSONObject json2 = new JSONObject(str2);
+
+                    String obj_name = json2.getString("name");
+                    String obj_price = json2.getString("price");
+                    String obj_calories = json2.getString("calories");
+
+                    SetRestaurant.ObjectRestaurant tempObj = new SetRestaurant.ObjectRestaurant();
+                    tempObj.setName( obj_name );
+                    tempObj.setPrice(obj_price);
+                    tempObj.setCalories(obj_calories);
+
+                    object.add( tempObj );
+                }
+
+                tempSet.setPrice( price );
+                tempSet.setCalories(calories);
+                tempSet.setObjects( object );
+
+                result.add( tempSet );
             }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
         }
 
-        @Override
-        protected void onPostExecute( Void result )
-        {
-            super.onPostExecute( result );
-        }
+        return result;
     }
 
 }

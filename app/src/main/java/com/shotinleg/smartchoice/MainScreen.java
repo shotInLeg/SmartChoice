@@ -1,93 +1,118 @@
 package com.shotinleg.smartchoice;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.shotinleg.smartchoice.NetworkRequest.GET;
-
+import static com.shotinleg.smartchoice.NetworkRequest.parse;
 
 public class MainScreen extends AppCompatActivity {
-
-    RequestTask requestTask;
-    TextView text;
-    String answer;
-    Intent intent;
+    private Intent intent;
+    private TextView text;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main_screen, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
-    public void onResultButtonClick(View view)
-    {
-        text = (TextView)findViewById(R.id.answer);
-        requestTask = new RequestTask();
-        intent = new Intent(this, Result.class);
+    public void onResultButtonClick(View view) {
+        RequestTask requestTask = new RequestTask();
+        intent = new Intent(this, ResultScreen.class);
 
         /*Intent intent = new Intent(this, Result.class);
         startActivity(intent);*/
+        text = (TextView) findViewById(R.id.answer);
 
-        EditText expenseObj = (EditText)findViewById(R.id.expense);
-        Editable expense = expenseObj.getText();
+        EditText expenseObj = (EditText) findViewById(R.id.expense);
+        String expense = expenseObj.getText().toString();
 
-        EditText quantityObj = (EditText)findViewById(R.id.quantity);
-        Editable quantity = quantityObj.getText();
+        EditText quantityObj = (EditText) findViewById(R.id.quantity);
+        String quantity = quantityObj.getText().toString();
 
-        requestTask.execute("https://api.vk.com/method/users.get", "user_ids", quantity.toString());
+        EditText calories_fromObj = (EditText) findViewById(R.id.calories_from);
+        String calories_from = calories_fromObj.getText().toString();
 
-        EditText calories_fromObj = (EditText)findViewById(R.id.calories_from);
-        Editable calories_from = calories_fromObj.getText();
+        EditText calories_toObj = (EditText) findViewById(R.id.calories_to);
+        String calories_to = calories_toObj.getText().toString();
 
-        EditText calories_toObj = (EditText)findViewById(R.id.calories_to);
-        Editable calories_to = calories_toObj.getText();
-
+        requestTask.execute("http://praysnik.16mb.com/api/getListSet.php", "user_ids", quantity);
 
     }
 
-    class RequestTask extends AsyncTask<String, Integer, Void>
+    /*@Override
+    public void onStart()
     {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction
+        (
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "MainScreen Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.shotinleg.smartchoice/http/host/path")
+        );
+
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "MainScreen Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.shotinleg.smartchoice/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }*/
+
+    class RequestTask extends AsyncTask<String, Integer, Void> {
+
+        private String answer = "";
 
         @Override
         protected void onPreExecute()
         {
             super.onPreExecute();
-            text.setText("Begin");
+            text.setText("Start");
         }
 
         @Override
@@ -104,9 +129,9 @@ public class MainScreen extends AppCompatActivity {
 
             String requestURL = dataParams[0];
             HashMap<String, String> postDataParams = new HashMap<String, String>();
-            for(Integer i = 1; i < cnt-1; i += 2)
+            for (Integer i = 1; i < cnt - 1; i += 2)
             {
-                postDataParams.put(dataParams[i], dataParams[i+1]);
+                postDataParams.put(dataParams[i], dataParams[i + 1]);
             }
 
             answer = GET(requestURL, postDataParams);
@@ -118,7 +143,20 @@ public class MainScreen extends AppCompatActivity {
         protected void onPostExecute(Void result)
         {
             super.onPostExecute(result);
-            intent.putExtra("answer", answer);
+
+            ArrayList<SetRestaurant> res = parse(answer);
+            String[] results = new String[res.size()];
+            for (int i = 0; i < res.size(); i++)
+            {
+                results[i] = "";
+                for (int j = 0; j < res.get(i).getObjects().size(); j++)
+                {
+                    results[i] = results[i] + res.get(i).getObjects().get(j).getName() + " ";
+                }
+            }
+
+            //text.setText(answer);
+            intent.putExtra("result", results );
             startActivity(intent);
 
         }
