@@ -29,7 +29,8 @@ public class MainScreen extends AppCompatActivity {
     private GoogleApiClient client;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -37,7 +38,8 @@ public class MainScreen extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void onResultButtonClick(View view) {
+    public void onResultButtonClick(View view)
+    {
         RequestTask requestTask = new RequestTask();
         intent = new Intent(this, ResultScreen.class);
 
