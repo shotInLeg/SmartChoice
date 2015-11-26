@@ -34,7 +34,6 @@ public class ResultScreen extends AppCompatActivity
 
             TableRow row = new TableRow(this);
             row.setMinimumHeight(100);
-            row.set
             row.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v)
