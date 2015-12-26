@@ -59,7 +59,7 @@ public class MainScreen extends AppCompatActivity {
         EditText calories_toObj = (EditText) findViewById(R.id.calories_to);
         String calories_to = calories_toObj.getText().toString();
 
-        requestTask.execute("http://praysnik.16mb.com/api/getListSet.php", "user_ids", quantity);
+        requestTask.execute("http://praysnik.16mb.com/api/getListSet.php?count="+expense+"&price="+quantity+"&l_cal="+calories_from+"&r_cal="+calories_to);
 
     }
 
@@ -114,7 +114,7 @@ public class MainScreen extends AppCompatActivity {
                 }
             }
 
-            //text.setText(answer);
+            text.setText( answer );
             intent.putExtra("result", results );
             startActivity(intent);
 

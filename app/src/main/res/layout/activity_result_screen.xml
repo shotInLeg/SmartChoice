@@ -7,7 +7,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.shotinleg.smartchoice.ResultScreen">
+    tools:context="com.shotinleg.smartchoice.ResultScreen"
+    android:padding="0dp"
+    android:background="#5a5a5a">
 
 
     <ListView
@@ -16,7 +18,9 @@
         android:id="@+id/listSet"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_margin="0dp"
+        android:background="#5a5a5a" />
 
     <TextView
         android:layout_width="wrap_content"

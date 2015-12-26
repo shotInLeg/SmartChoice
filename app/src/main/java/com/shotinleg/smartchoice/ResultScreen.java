@@ -7,13 +7,20 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResultScreen extends AppCompatActivity
 {
@@ -25,13 +32,14 @@ public class ResultScreen extends AppCompatActivity
         setContentView(R.layout.activity_result_screen);
 
         Intent intent = getIntent();
-        final String[] catnames = intent.getStringArrayExtra("result");
+        final String[] texts = intent.getStringArrayExtra("result");
+        int img = R.mipmap.ic_launcher;
 
         TextView text = (TextView)findViewById(R.id.textView2);
 
-        if( catnames.length > 0 )
+        if( texts.length > 0 )
         {
-            text.setText(catnames[0]);
+            text.setText("");
         }
         else
         {
@@ -40,26 +48,38 @@ public class ResultScreen extends AppCompatActivity
 
         ListView listSet = (ListView)findViewById(R.id.listSet);
 
-        for( int j = 0; j < SetRestaurant.listSetRestaurant.size(); j++ )
+
+        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(SetRestaurant.listSetRestaurant.size());
+        Map<String, Object> m;
+        for (int i = 0; i < SetRestaurant.listSetRestaurant.size(); i++)
         {
-            final int finalJ = j;
-
-
-            /*row.setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick(View v)
-                {
-                    Intent intent  = new Intent(ResultScreen.this, InfoScreen.class);
-                    intent.putExtra( "number", String.valueOf( finalJ ) );
-                    startActivity(intent);
-                }
-            });*/
-
-
-
-            //listSet.addView( SetRestaurant.listSetRestaurant.get(j).getObjects().get(0).getName() );
+            m = new HashMap<String, Object>();
+            m.put("text1", SetRestaurant.listSetRestaurant.get(i).getObjects().get(0).getName() );
+            m.put("text2", SetRestaurant.listSetRestaurant.get(i).getCalories() );
+            m.put("text3", SetRestaurant.listSetRestaurant.get(i).getPrice() );
+            m.put("image", img);
+            data.add(m);
         }
 
+        String[] from = { "text3", "text2", "text1", "image" };
+        int[] to = {R.id.tvPrice, R.id.tvCalories, R.id.tvName, R.id.ivImg };
+
+
+        SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.list_item, from, to);
+
+        listSet.setAdapter(adapter);
+
+
+        listSet.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id)
+            {
+                Intent intent = new Intent(ResultScreen.this, InfoScreen.class);
+                intent.putExtra("id", String.valueOf( id ) );
+                startActivity(intent);
+            }
+        });
 
 
 
