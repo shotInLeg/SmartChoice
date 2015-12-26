@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.shotinleg.smartchoice.MainScreen">
+    tools:context="com.shotinleg.smartchoice.MainScreen"
+    android:background="#5a5a5a">
 
 
     <ScrollView
@@ -29,11 +26,19 @@
             android:layout_alignParentStart="true">
 
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@android:dimen/thumbnail_height"
+                android:id="@+id/splashImg"
+                android:layout_gravity="center_horizontal"
+                android:src="#bf3e3e" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/quantity"
+
                 android:layout_gravity="center_horizontal"
                 android:inputType="number"
                 android:letterSpacing="5"
@@ -42,7 +47,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:padding="7dp"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:numeric="integer"
+
+                android:textAlignment="center"
+                android:textSize="25sp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -56,7 +65,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:padding="7dp"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+
+                android:textAlignment="center"
+                android:textSize="25sp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -67,17 +79,20 @@
                 android:layout_marginBottom="10dp">
 
                 <EditText
-                    android:layout_width="164dp"
+                    android:layout_width="178dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/calories_from"
                     android:layout_gravity="center_horizontal"
-                    android:background="#ffffff"
                     android:singleLine="true"
                     android:padding="7dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+
+                    android:textAlignment="textStart"
+                    android:background="#ffffff"
+                    android:textSize="25sp" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -89,7 +104,10 @@
                     android:singleLine="true"
                     android:padding="7dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+
+                    android:textAlignment="textStart"
+                    android:textSize="25sp" />
             </LinearLayout>
 
             <TextView
@@ -98,13 +116,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/answer"
-                android:layout_gravity="center_horizontal" />
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"/>
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textStyle="italic"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
 
             <Button
                 android:layout_width="match_parent"
@@ -112,11 +129,13 @@
                 android:text="@string/button_result"
                 android:id="@+id/result"
                 android:layout_gravity="center_horizontal"
-                android:background="#00ffffff"
+                android:background="#ffffff"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_margin="10dp"
-                android:onClick="onResultButtonClick" />
+                android:onClick="onResultButtonClick"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

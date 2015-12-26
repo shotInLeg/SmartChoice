@@ -63,49 +63,6 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public void onStart()
-    {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction
-        (
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "MainScreen Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.shotinleg.smartchoice/http/host/path")
-        );
-
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "MainScreen Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.shotinleg.smartchoice/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }*/
-
     class RequestTask extends AsyncTask<String, Integer, Void> {
 
         private String answer = "";
@@ -146,14 +103,14 @@ public class MainScreen extends AppCompatActivity {
         {
             super.onPostExecute(result);
 
-            ArrayList<SetRestaurant> res = parse(answer);
-            String[] results = new String[res.size()];
-            for (int i = 0; i < res.size(); i++)
+            SetRestaurant.listSetRestaurant = parse(answer);
+            String[] results = new String[SetRestaurant.listSetRestaurant.size()];
+            for (int i = 0; i < SetRestaurant.listSetRestaurant.size(); i++)
             {
                 results[i] = "";
-                for (int j = 0; j < res.get(i).getObjects().size(); j++)
+                for (int j = 0; j < SetRestaurant.listSetRestaurant.get(i).getObjects().size(); j++)
                 {
-                    results[i] = results[i] + res.get(i).getObjects().get(j).getName() + " ";
+                    results[i] = results[i] + SetRestaurant.listSetRestaurant.get(i).getObjects().get(j).getName() + " ";
                 }
             }
 

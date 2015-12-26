@@ -27,14 +27,25 @@ public class ResultScreen extends AppCompatActivity
         Intent intent = getIntent();
         final String[] catnames = intent.getStringArrayExtra("result");
 
-        TableLayout listView = (TableLayout)findViewById(R.id.tableView);
-        for( int j = 0; j < catnames.length; j++ )
+        TextView text = (TextView)findViewById(R.id.textView2);
+
+        if( catnames.length > 0 )
+        {
+            text.setText(catnames[0]);
+        }
+        else
+        {
+            text.setText("Список пуст");
+        }
+
+        ListView listSet = (ListView)findViewById(R.id.listSet);
+
+        for( int j = 0; j < SetRestaurant.listSetRestaurant.size(); j++ )
         {
             final int finalJ = j;
 
-            TableRow row = new TableRow(this);
-            row.setMinimumHeight(100);
-            row.setOnClickListener(new View.OnClickListener()
+
+            /*row.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v)
                 {
@@ -42,25 +53,11 @@ public class ResultScreen extends AppCompatActivity
                     intent.putExtra( "number", String.valueOf( finalJ ) );
                     startActivity(intent);
                 }
-            });
+            });*/
 
-            ImageView col1 = new ImageView(this);
-            TextView col2 = new TextView(this);
-            TextView col3 = new TextView(this);
-            TextView col4 = new TextView(this);
 
-            col1.setMinimumWidth(100);
-            col1.setMinimumHeight(100);
-            col2.setText(catnames[j]);
-            col3.setText("150ккал");
-            col4.setText("200р");
 
-            row.addView(col1);
-            row.addView(col2);
-            row.addView(col3);
-            row.addView(col4);
-
-            listView.addView(row);
+            //listSet.addView( SetRestaurant.listSetRestaurant.get(j).getObjects().get(0).getName() );
         }
 
 

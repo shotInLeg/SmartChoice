@@ -59,4 +59,6 @@ public class SetRestaurant
     {
         return  objects;
     }
+
+    public static ArrayList<SetRestaurant> listSetRestaurant;
 }
