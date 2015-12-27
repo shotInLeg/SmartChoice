@@ -1,12 +1,14 @@
 package com.shotinleg.smartchoice;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -36,6 +38,9 @@ public class MainScreen extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        ImageView splash = (ImageView)findViewById( R.id.splashImg );
+        splash.setImageBitmap(BitmapFactory.decodeResource( this.getResources(), R.mipmap.splash1 ));
     }
 
     public void onResultButtonClick(View view)
@@ -59,7 +64,7 @@ public class MainScreen extends AppCompatActivity {
         EditText calories_toObj = (EditText) findViewById(R.id.calories_to);
         String calories_to = calories_toObj.getText().toString();
 
-        requestTask.execute("http://praysnik.16mb.com/api/getListSet.php?count="+expense+"&price="+quantity+"&l_cal="+calories_from+"&r_cal="+calories_to);
+        requestTask.execute("http://praysnik.16mb.com/api/getListSet.php?count="+quantity+"&price="+expense+"&l_cal="+calories_from+"&r_cal="+calories_to);
 
     }
 

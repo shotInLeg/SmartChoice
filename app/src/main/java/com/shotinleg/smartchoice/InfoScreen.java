@@ -1,8 +1,10 @@
 package com.shotinleg.smartchoice;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -20,6 +22,9 @@ public class InfoScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_screen);
 
+        ImageView splash = (ImageView)findViewById( R.id.setSplash );
+        splash.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.mipmap.splash2));
+
         Intent intent = getIntent();
         final String number = intent.getStringExtra("id");
 
@@ -28,6 +33,12 @@ public class InfoScreen extends AppCompatActivity
 
 
         int idNumber = Integer.parseInt(number);
+
+        TextView prc = (TextView)findViewById( R.id.lPrice );
+        TextView clrs = (TextView)findViewById( R.id.lCalories);
+
+        prc.setText( SetRestaurant.listSetRestaurant.get(idNumber).getPrice() );
+        clrs.setText( SetRestaurant.listSetRestaurant.get(idNumber).getCalories() );
 
         ListView setComposition = (ListView)findViewById(R.id.setComposition);
         int img = R.mipmap.ic_launcher;
