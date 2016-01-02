@@ -2,48 +2,78 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="65dp"
+    android:orientation="horizontal"
+    android:background="#FFFEBB">
     <ImageView
         android:id="@+id/ivImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:src="@mipmap/ic_launcher">
     </ImageView>
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
+            android:textColor="#FFA4D0"
+            android:text="Name Item"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:lines="1">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="SubName Item"
+            android:id="@+id/tvSubName"
+            android:textColor="#99BDD3"
+            android:layout_marginTop="3dp"
+            android:textSize="15dp"
+            android:lines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginRight="50dp"
-            android:textColor="#ffffff"
-            android:text="TextView">
+            android:textColor="#A349A3"
+            android:textStyle="bold"
+            android:text="price"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:lines="1">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="#7E807F"
+            android:textStyle="bold"
+            android:text="calories"
+            android:layout_marginTop="8dp"
+            android:textSize="18dp"
+            android:lines="1">
         </TextView>
     </LinearLayout>
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginRight="30dp"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:text="TextView">
-    </TextView>
-    <TextView
-        android:id="@+id/tvCalories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="25dp"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:text="TextView">
-    </TextView>
+
 </LinearLayout>

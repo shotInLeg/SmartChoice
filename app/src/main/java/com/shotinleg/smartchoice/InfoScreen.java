@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.shotinleg.smartchoice.SetRestaurant.getIconFormId;
+import static com.shotinleg.smartchoice.SetRestaurant.listSetRestaurant;
+
 public class InfoScreen extends AppCompatActivity
 {
 
@@ -37,26 +40,31 @@ public class InfoScreen extends AppCompatActivity
         TextView prc = (TextView)findViewById( R.id.lPrice );
         TextView clrs = (TextView)findViewById( R.id.lCalories);
 
-        prc.setText( SetRestaurant.listSetRestaurant.get(idNumber).getPrice() );
-        clrs.setText( SetRestaurant.listSetRestaurant.get(idNumber).getCalories() );
+        prc.setText( "Р: "+listSetRestaurant.get(idNumber).getPrice() );
+        clrs.setText( "К: "+listSetRestaurant.get(idNumber).getCalories() );
 
         ListView setComposition = (ListView)findViewById(R.id.setComposition);
-        int img = R.mipmap.ic_launcher;
 
-        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>( SetRestaurant.listSetRestaurant.get(idNumber).getObjects().size() );
+
+        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>( listSetRestaurant.get(idNumber).getObjects().size() );
         Map<String, Object> m;
-        for (int i = 0; i < SetRestaurant.listSetRestaurant.get(idNumber).getObjects().size(); i++)
+        for (int i = 0; i < listSetRestaurant.get(idNumber).getObjects().size(); i++)
         {
             m = new HashMap<String, Object>();
-            m.put("text1", SetRestaurant.listSetRestaurant.get(idNumber).getObjects().get(i).getName() );
-            m.put("text2", SetRestaurant.listSetRestaurant.get(idNumber).getObjects().get(i).getCalories() );
-            m.put("text3", SetRestaurant.listSetRestaurant.get(idNumber).getObjects().get(i).getPrice() );
-            m.put("image", img);
+
+            m.put("Name", listSetRestaurant.get(idNumber).getObjects().get(i).getName() );
+            m.put("Calories", "К: "+listSetRestaurant.get(idNumber).getObjects().get(i).getCalories() );
+            m.put("Price", "Р: "+listSetRestaurant.get(idNumber).getObjects().get(i).getPrice() );
+            m.put("SubName", "");
+
+            int img = getIconFormId( listSetRestaurant.get(idNumber).getObjects().get(i).getId() );
+
+            m.put("Icon", img);
             data.add(m);
         }
 
-        String[] from = { "text3", "text2", "text1", "image" };
-        int[] to = {R.id.tvPrice, R.id.tvCalories, R.id.tvName, R.id.ivImg };
+        String[] from = { "Price", "Calories", "Name", "SubName", "Icon" };
+        int[] to = {R.id.tvPrice, R.id.tvCalories, R.id.tvName, R.id.tvSubName, R.id.ivImg };
 
 
         SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.list_item, from, to);

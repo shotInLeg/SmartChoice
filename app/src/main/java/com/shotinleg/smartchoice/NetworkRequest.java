@@ -132,14 +132,18 @@ public class NetworkRequest
                     String str2 = objects.getString(j);
                     JSONObject json2 = new JSONObject(str2);
 
+                    int obj_id  = json2.getInt("id");
                     String obj_name = json2.getString("name");
                     String obj_price = json2.getString("price");
                     String obj_calories = json2.getString("calories");
+                    String obj_type = json2.getString("type");
 
                     SetRestaurant.ObjectRestaurant tempObj = new SetRestaurant.ObjectRestaurant();
+                    tempObj.setId(obj_id);
                     tempObj.setName( obj_name );
                     tempObj.setPrice(obj_price);
                     tempObj.setCalories(obj_calories);
+                    tempObj.setType(obj_type);
 
                     object.add( tempObj );
                 }
