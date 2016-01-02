@@ -81,6 +81,7 @@ public class SetRestaurant
         if( idItem == 54 ) return R.mipmap.cdrink05;
         if( idItem == 55 || idItem == 62 ) return R.mipmap.cdrink08;
 
+        if( idItem >= 64 && idItem <= 65 ) return R.mipmap.tea;
         if( idItem >= 66 && idItem <= 67 ) return R.mipmap.coffeeblack;
         if( idItem == 68 ) return R.mipmap.coffeeessp;
         if( idItem >= 69 && idItem <= 73 ) return R.mipmap.coffeemilk;
