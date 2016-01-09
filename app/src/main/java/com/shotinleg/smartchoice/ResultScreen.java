@@ -61,8 +61,8 @@ public class ResultScreen extends AppCompatActivity
 
 
             m.put("SubName", subname );
-            m.put("Price", "Р: "+listSetRestaurant.get(i).getPrice() );
-            m.put("Calories", "К: "+listSetRestaurant.get(i).getCalories() );
+            m.put("Price", listSetRestaurant.get(i).getPrice()+"руб." );
+            m.put("Calories", listSetRestaurant.get(i).getCalories()+"ккал" );
 
 
             int img = getIconFormId( listSetRestaurant.get(i).getObjects().get(0).getId() );
@@ -72,7 +72,7 @@ public class ResultScreen extends AppCompatActivity
         }
 
         String[] from = { "Price", "Calories", "Name", "SubName", "Icon" };
-        int[] to = {R.id.tvPrice, R.id.tvCalories, R.id.tvName, R.id.tvSubName, R.id.ivImg };
+        int[] to = {R.id.tvLIPrice, R.id.tvLICalories, R.id.tvLIName, R.id.tvLISubName, R.id.ivLIImg };
 
 
         SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.list_item, from, to);

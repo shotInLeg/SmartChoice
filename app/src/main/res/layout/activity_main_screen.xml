@@ -85,7 +85,7 @@
                 android:layout_marginRight="40dp">
 
                 <EditText
-                    android:layout_width="178dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
@@ -99,7 +99,8 @@
                     android:textAlignment="textStart"
                     android:background="#ffffff"
                     android:textSize="25sp"
-                    android:hint="Калории от" />
+                    android:hint="Калории от"
+                    android:layout_weight="1" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -114,7 +115,8 @@
 
                     android:textAlignment="textStart"
                     android:textSize="25sp"
-                    android:hint="до" />
+                    android:hint="до"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <TextView

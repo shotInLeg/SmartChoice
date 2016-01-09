@@ -2,50 +2,54 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="70dp"
     android:orientation="horizontal"
     android:background="#fefefb">
     <ImageView
-        android:id="@+id/ivLIImg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_gravity="center_vertical">
+        android:id="@+id/ivLI1Img"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_launcher">
     </ImageView>
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tvLIName"
+            android:id="@+id/tvLI1Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#e80813"
             android:text="Name Item"
-            android:textSize="22dp"
+            android:textSize="20dp"
             android:layout_marginTop="10dp"
-            android:lines="1"
+            android:lines="2"
             android:layout_weight="1"
-            android:textAlignment="gravity"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical">
         </TextView>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp">
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="SubName Item"
-            android:id="@+id/tvLISubName"
-            android:textColor="#000000"
-            android:layout_marginTop="3dp"
-            android:textSize="16dp"
-            android:lines="1"
-            android:layout_weight="2"
-            android:layout_marginBottom="10dp" />
-
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="count"
+            android:id="@+id/tvLI1Count"
+            android:gravity="center_vertical"
+            android:textSize="18dp"
+            android:textColor="#0b2bf8" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +59,7 @@
         android:layout_marginRight="20dp">
 
         <TextView
-            android:id="@+id/tvLIPrice"
+            android:id="@+id/tvLI1Price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#187e18"
@@ -63,13 +67,13 @@
             android:text="price"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:lines="1"
             android:layout_weight="1">
         </TextView>
 
         <TextView
-            android:id="@+id/tvLICalories"
+            android:id="@+id/tvLI1Calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -77,7 +81,7 @@
             android:textStyle="bold"
             android:text="calories"
             android:layout_marginTop="8dp"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:lines="1"
             android:layout_weight="1"
             android:layout_marginBottom="10dp">

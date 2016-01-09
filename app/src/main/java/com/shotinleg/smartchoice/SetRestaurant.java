@@ -16,21 +16,21 @@ public class SetRestaurant
         private String price;
         private String calories;
         private String type;
+        private String count;
 
         public void setId( int _id ) { id = _id; }
         public void setName( String _name) { name = _name; }
         public void setPrice( String _price ) { price = _price; }
         public void setCalories( String _colories ) { calories = _colories; }
         public void setType( String _type ) { type = _type; }
+        public void setCount( String _count ) { count = _count; }
 
         public int    getId() { return id; }
         public String getName() { return name; }
         public String getPrice() { return price; }
-        public String getCalories()
-        {
-            return calories;
-        }
+        public String getCalories() { return calories; }
         public String getType() { return type; }
+        public String getCount() { return count; }
     }
 
     private String price;

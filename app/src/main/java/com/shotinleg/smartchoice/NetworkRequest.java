@@ -137,6 +137,7 @@ public class NetworkRequest
                     String obj_price = json2.getString("price");
                     String obj_calories = json2.getString("calories");
                     String obj_type = json2.getString("type");
+                    String obj_count = json2.getString("count");
 
                     SetRestaurant.ObjectRestaurant tempObj = new SetRestaurant.ObjectRestaurant();
                     tempObj.setId(obj_id);
@@ -144,6 +145,7 @@ public class NetworkRequest
                     tempObj.setPrice(obj_price);
                     tempObj.setCalories(obj_calories);
                     tempObj.setType(obj_type);
+                    tempObj.setCount( obj_count );
 
                     object.add( tempObj );
                 }

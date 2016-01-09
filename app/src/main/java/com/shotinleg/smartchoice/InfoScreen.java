@@ -31,8 +31,6 @@ public class InfoScreen extends AppCompatActivity
         Intent intent = getIntent();
         final String number = intent.getStringExtra("id");
 
-        TextView text = (TextView)findViewById(R.id.numberSet);
-        text.setText("Набор номер: " + number);
 
 
         int idNumber = Integer.parseInt(number);
@@ -40,8 +38,8 @@ public class InfoScreen extends AppCompatActivity
         TextView prc = (TextView)findViewById( R.id.lPrice );
         TextView clrs = (TextView)findViewById( R.id.lCalories);
 
-        prc.setText( "Р: "+listSetRestaurant.get(idNumber).getPrice() );
-        clrs.setText( "К: "+listSetRestaurant.get(idNumber).getCalories() );
+        prc.setText( listSetRestaurant.get(idNumber).getPrice()+"руб." );
+        clrs.setText( listSetRestaurant.get(idNumber).getCalories()+"ккал" );
 
         ListView setComposition = (ListView)findViewById(R.id.setComposition);
 
@@ -53,9 +51,9 @@ public class InfoScreen extends AppCompatActivity
             m = new HashMap<String, Object>();
 
             m.put("Name", listSetRestaurant.get(idNumber).getObjects().get(i).getName() );
-            m.put("Calories", "К: "+listSetRestaurant.get(idNumber).getObjects().get(i).getCalories() );
-            m.put("Price", "Р: "+listSetRestaurant.get(idNumber).getObjects().get(i).getPrice() );
-            m.put("SubName", "");
+            m.put("Calories", listSetRestaurant.get(idNumber).getObjects().get(i).getCalories()+"ккал" );
+            m.put("Price", listSetRestaurant.get(idNumber).getObjects().get(i).getPrice()+"руб." );
+            m.put("Count", listSetRestaurant.get(idNumber).getObjects().get(i).getCount() );
 
             int img = getIconFormId( listSetRestaurant.get(idNumber).getObjects().get(i).getId() );
 
@@ -63,11 +61,11 @@ public class InfoScreen extends AppCompatActivity
             data.add(m);
         }
 
-        String[] from = { "Price", "Calories", "Name", "SubName", "Icon" };
-        int[] to = {R.id.tvPrice, R.id.tvCalories, R.id.tvName, R.id.tvSubName, R.id.ivImg };
+        String[] from = { "Price", "Calories", "Count", "Name", "Icon" };
+        int[] to = {R.id.tvLI1Price, R.id.tvLI1Calories, R.id.tvLI1Count, R.id.tvLI1Name, R.id.ivLI1Img };
 
 
-        SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.list_item, from, to);
+        SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.list_item_1row, from, to);
 
         setComposition.setAdapter(adapter);
     }
